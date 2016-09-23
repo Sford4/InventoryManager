@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="templates/cart/cart.css">
+	<title>Cart</title>
+</head>
+<body>
+	<h2>Items in your Cart</h2>
+	<table>
+        <tr class="header-row">
+          <td class="cart1">Amount</td>
+          <td class="cart2">Product</td>
+          <td class="cart3">Price</td>
+          <td class="cart4"> </td>
+
+        </tr>
+        <tr ng-repeat="item in cart.cartItems.subTransactions">
+          <td class="cart1"><span>{{item.qty}}</span></td>
+          <td class="cart2">{{item.details.name}}</td>
+          <td class="cart3">{{item.details.price}}</td>
+          <td class="cart4"><button ng-click="cart.removeItem(item)">Remove Item</button></td>
+        </tr>
+        <tr ng-if="cart.cartItems.subTransactions.length === 0">
+          <td class="emptyMsg">Your cart is empty!  BUY THINGS!!!</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+      <button class="place-btn" ng-click="cart.post(cart.cartItems)">Place Order</button>
+
+</body>
+</html>

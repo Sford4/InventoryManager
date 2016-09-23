@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="newProd.close()" data-dismiss="modal">&times;</button>
+    <h2>Create New Product</h2>
+</div>
+<div class="modal-body">
+		<h5>Product Image</h5>
+		<input type="text" placeholder="Paste Image URL here" ng-model="newProd.newProd.imgThumbnail">
+		<h5>Product Name</h5>
+		<input type="text" placeholder="Product Name" ng-model="newProd.newProd.name">
+		<h5>Description</h5>
+		<input type="text" placeholder="What it is? What it do?" ng-model="newProd.newProd.description">
+		<h5>Cost</h5>
+		<input type="text" placeholder="Cost" ng-model="newProd.newProd.cost">
+		<h5>Price</h5>
+		<input type="text" placeholder="Price" ng-model="newProd.newProd.price">
+		<h5>Amount</h5>
+		<input type="text" placeholder="Quantity" ng-model="newProd.newProd.amt">
+</div>
+<div class="modal-footer">
+	<button ng-click="newProd.post(newProd.newProd); newProd.close()" data-dismiss="modal">Finished</button>
+</div>
+

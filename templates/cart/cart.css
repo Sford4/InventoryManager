@@ -1,0 +1,139 @@
+table {
+    border: 1px solid gray;
+    border-collapse: separate;
+    width: 90%;
+    margin: .5vw auto;
+}
+
+table tbody, table thead
+{
+    display: block;
+    width: 100%;
+}
+
+table tbody{
+  max-height: 25vw;
+  overflow-y: scroll;
+}
+
+td{
+	padding-left: 3vw;
+	height: 2.5vw;
+}
+
+
+tr:nth-child(even) {
+	background-color: #E6E6FA;
+}
+
+h2 {
+  margin: 0 2vw 2vw 2vw;
+  border-bottom: 1px solid #9370DB;
+  border-bottom-width: thick;
+}
+
+
+.header-row {
+	font-weight: bold;
+	background-color: #9370DB;
+	color: white;
+}
+
+.table-title {
+	margin-left: 11vw;
+	margin-top: 3vw;
+	font-weight: bold;
+
+}
+
+td a:hover{
+  color: #9370DB;
+  cursor: pointer;
+}
+
+
+h1 {
+  margin: 0 2vw;
+  border-bottom: 1px solid #9370DB;
+  border-bottom-width: thick;
+}
+
+input {
+	width: 3vw;
+}
+
+button {
+	background-color: #9370DB;
+    border: none;
+    color: white;
+    padding: 8px 20px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+
+
+
+td > a {
+	color: white;
+}
+
+tbody a{
+  color: blue;
+}
+
+.modal-body input {
+	width: 10vw;
+}
+
+.close {
+	color: white;
+}
+
+
+.modal-header {
+   background: #9370DB;
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+   color: white;
+}
+
+#myModal .modal-body
+{
+   max-height:80%;
+}
+#myModal.modal
+{
+   height:80%;
+   width:70%;
+   margin-left: -35%; 
+}
+@media (max-width: 768px) {
+   .modal
+   {
+    width:90%;
+        margin-left: 2%; 
+   }
+}
+
+.cart1{
+  width: 30vw;
+}
+
+.cart2{
+  width: 30vw;
+}
+
+.cart3{
+  width: 30vw;
+}
+
+.emptyMsg{
+  width: 90vw;
+}
+
+.place-btn{
+  margin-left: 85vw;
+}
+

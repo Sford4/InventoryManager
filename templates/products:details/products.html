@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="templates/products:details/product.css">
+	<title>Products</title>
+</head>
+<body>
+	<h1>Products</h1>
+	<div id="product-list" ng-repeat="product in products.productList" class="prod-row row-centered">
+		<div class="prod-box col-xs-18 col-sm-4 col-md-3" >
+			<div class="imgthumb img-responsive thumbnail"> 
+				<img class="product-thumb" src="{{product.imgThumbnail}}"></img>
+			</div>
+			<div class="caption">
+				<div class="caption-name"><h5>{{product.name}}</h5></div>
+				<div class="caption-price">{{product.price | currency}} <button ng-click="products.goToDetail(product.id)" class="see-more-btn btn-xs pull-right" role="button">See More</button></div>
+
+			</div>
+			<div class="buy">
+				<button class="buy-btn" ng-click="products.saleOpen(product.id)">Add to cart</button>
+			</div>
+			
+		</div>
+	</div>
+
+</body>
+</html>

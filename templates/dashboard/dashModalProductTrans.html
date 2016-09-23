@@ -1,0 +1,29 @@
+
+
+<!-- Modal -->
+
+  <div class="modal-header" id="myModal">
+    <button type="button" class="close" data-dismiss="modal" ng-click="dashTrans.close()">&times;</button>
+    <h4 class="modal-title">{{productTrans.name}} Transactions</h4>
+  </div>
+  <div class="modal-body" >
+      <table>
+        <tr class="header-row">
+          <td>Date</td>
+          <td>Description</td>
+          <td>Amount</td>
+          <td>Cost</td>
+          <td>Price</td>
+        </tr>
+        <tr ng-repeat="transaction in dashTrans.productTrans">
+          <td>{{transaction.date | date}}</td>
+          <td>{{transaction.type.description}}</td>
+          <td>{{transaction.totalAmt}}</td>
+          <td>{{transaction.totalCost | currency}}</td>
+          <td>{{transaction.totalPrice | currency}}</td>
+        </tr>
+      </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" ng-click="dashTrans.close()">Finished</button>
+  </div>

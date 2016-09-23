@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="templates/orderHx/orderHx.css">
+	<title>Order History</title>
+</head>
+<body>
+	<div class="hx-welcome"><h1>Order History</h1></div>
+	<div>
+		<form>
+		    <div class="form-group">
+		      <div class="input-group">
+		        <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+
+		        <input type="text" class="form-control" placeholder="Search History" ng-model="searchHx">
+
+		      </div>      
+		    </div>
+	  	</form>
+		<table class="hx-table">
+			<tr class="table-head">
+				<td>
+					<a ng-click="sortType = 'date'; reverse = !reverse"> 
+						Date of sale
+						<span ng-show="sortType === 'date' && reverse" class="glyphicon glyphicon-triangle-bottom"></span>
+						<span ng-show="sortType === 'date' && !reverse" class="glyphicon glyphicon-triangle-top"></span>
+					</a>
+				</td>
+				<td>
+					<a ng-click="sortType = 'note'; reverse = !reverse"> 
+						Notes
+						<span ng-show="sortType === 'note' && reverse" class="glyphicon glyphicon-triangle-bottom"></span>
+						<span ng-show="sortType === 'note' && !reverse" class="glyphicon glyphicon-triangle-top"></span>
+					</a>
+				</td>
+				<td>
+					<a ng-click="sortType = 'totalCost'; reverse = !reverse"> 
+						Price
+						<span ng-show="sortType === 'totalCost' && reverse" class="glyphicon glyphicon-triangle-bottom"></span>
+						<span ng-show="sortType === 'totalCost' && !reverse" class="glyphicon glyphicon-triangle-top"></span>
+					</a>
+				</td>
+				<td></td>
+			</tr>
+			<tr ng-repeat="sale in Hx.userHx | orderBy:sortType:reverse | filter:searchHx" ng-if="sale.type.description!=='Returned'" class="hx-table-data">
+				<td>{{sale.date | date}}</td>
+				<td>{{sale.note || 'None'}}</td>
+				<td>{{sale.totalCost | currency:"$" }}</td>
+				<td><button ng-click="Hx.returnIt(sale)">Return Item</button></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
+
+
+			
+<!-- Orders History
+Only visible to logged-in Users
+Display all of the logged-in user’s orders
+Display that parts of an order have been returned
+Return part of an order, or return as defective
+ -->

@@ -1,0 +1,14 @@
+<div class="modal-header" id="myModal2">
+    <button type="button" class="close" ng-click="sale.close()" data-dismiss="modal">&times;</button>
+    <h2>Buy a(n) {{sale.product.name}}!</h2><input ng-model="sale.details.name" ng-hide="sale.hide">
+</div>
+<div class="modal-body">
+		<h5>Quantity</h5>
+		<a class="glyphicon glyphicon-minus" ng-click="sale.subtractOne()"></a><input type="text" ng-model="sale.sale.qty" class="qty"><a class="glyphicon glyphicon-plus" ng-click="sale.addOne()"></a>
+		<h5>Price</h5>
+		<span>{{sale.product.price * sale.sale.qty | currency}}</span><input ng-model="sale.details.price" ng-hide="sale.hide">
+</div>
+<div class="modal-footer">
+	<button ng-click="sale.sendToCart(sale.sale); sale.close()" data-dismiss="modal">Add to cart!</button>
+</div>
+

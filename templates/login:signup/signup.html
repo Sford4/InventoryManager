@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="templates/login:signup/login:signup.css">
+	<title>Sign up</title>
+</head>
+<body ng-controller="signup">
+	<div class="form">
+		<h2 class="title">Sign up- the most fun you'll have today!</h2>
+		<form name="signForm" nonvalidation>
+			<div class="form-stuff">
+				<div class="fail-msg" ng-hide="signup.goodSignup">
+					<p>{{signup.errorMsg}};  try again!</p>
+				</div>
+				<div id="user-first-name">
+					<p>First Name</p>
+					<input type="text" name="firstName" ng-model="signup.newUser.fName" placeholder="First Name" required>
+				</div>
+				<div id="user-last-name">
+					<p>Last Name</p>
+					<input type="text" name="lastName" ng-model="signup.newUser.lName" placeholder="Last Name" required>
+				</div>
+				<div id="user-email">
+					<p>Email</p>
+					<input type="email" name="email" ng-model="signup.newUser.email" placeholder="Email" required>
+				</div>
+				<div id="user-password">
+					<p>Password</p>
+					<input type="password" name="password1" ng-model="signup.newUser.password" placeholder="Password" required pattern=".{2,}">
+				</div>
+				<div id="user-password-confirm">
+					<p>Confirm Password</p>
+					<input type="password" name="password2" ng-model="signup.newUser.passwordConfirm" match="password" placeholder="Password Confirmation" required>
+					<div ng-show="signForm.password1 !== signFrom.password2">Fields do not match!</div>
+				</div>
+				<div id="signup-btn">
+					<button ng-disabled="signForm.firstName.$pristine || signForm.email.$invalid || signForm.email.$pristine || signForm.password1.$pristine || signForm.password2.$pristine || signForm.password1 !== signFrom.password2" ng-click="signup.createUser(signup.newUser)" >Signup</button>
+
+				</div>
+				<p>Already a member? Login <a ui-sref="login">here</a>.</p>
+			</div>
+		</form>
+	</div>
+	
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+ <div class="modal-header" id="myModal">
+    <button type="button" class="close" data-dismiss="modal" ng-click="subtrans.close()">&times;</button>
+    <h4 class="modal-title">Make Purchase</h4>
+  </div>
+  <div class="modal-body" >
+      <table>
+        <tr class="header-row">
+          <td>Amount</td>
+          <td>Product</td>
+          <td>Cost</td>
+          <td>Price</td>
+          <td>Type</td>
+        </tr>
+        <tr ng-repeat="transaction in subtrans.specificTrans.subTransactions">
+          <td>{{transaction.amt}}</td>
+          <td>{{transaction.name}}</td>
+          <td>{{transaction.summary.cost}}</td>
+          <td>{{transaction.summary.price}}</td>
+          <td>{{transaction.typeDescription}}</td>
+        </tr>
+      </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" ng-click="subtrans.close()">BUYBUYBUY</button>
+  </div>

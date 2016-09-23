@@ -1,0 +1,34 @@
+
+<div class="modal-header">
+    <button type="button" class="close" ng-click="newTrans.close()" data-dismiss="modal">&times;</button>
+    <h2>Create New Transaction</h2>
+</div>
+<div class="modal-body">
+		<h5>Date</h5>
+		<input type="text" value="{{newTrans.getDatetime | date}}" ng-model="newTrans.getDatetime">
+		<h5>Description</h5>
+		<input type="text" placeholder="Sale, Returned, etc" ng-model="newTrans.newTrans.type.description">
+		<h5>Amount</h5>
+		<input type="text" placeholder="Number of products in transaction" ng-model="newTrans.newTrans.totalAmt">
+		<h5>Cost</h5>
+		<input type="text" placeholder="Cost" ng-model="newTrans.newTrans.totalCost">
+		<h5>Price</h5>
+		<input type="text" placeholder="Price" ng-model="newTrans.newTrans.totalPrice">
+		<form name="type-dropdown">
+    		<h5>Transaction Type</h5>
+    		<select name="type-id" ng-model="newTrans.newTrans.type.id">
+      			<option value=1>Sale</option>
+      			<option value=2>Lost/Stolen</option>
+      			<option value=3>Returned to Supplier</option>
+      			<option value=4>Inventory Purchase</option>
+      			<option value=5>Returned</option>
+      			<option value=6>Returned Defective</option>
+   			</select>
+   		</form>
+		<h5>Note</h5>
+		<input type="text" placeholder="Whatever you want?" ng-model="newTrans.newTrans.note">
+</div>
+<div class="modal-footer">
+	<button ng-click="newTrans.post(newTrans.newTrans); newTrans.close()" data-dismiss="modal">Submit</button>
+</div>
+

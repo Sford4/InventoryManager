@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="templates/products:details/details.css">
+	<title>Details: {{details.product.name}}</title>
+</head>
+<body>
+	<div id="product-details">
+		<div class="prod-details-img"> 
+			<img class="prod-pic" src="{{details.product.imgThumbnail}}">
+		</div>
+		<div class="prod-info">
+			<div class="prod-details">
+				<div>
+					<div><h2>{{details.product.name}}</h2> <button class="cart-btn" ng-click="details.saleOpen(details.product.id)">Add to cart</button></div>
+				</div>
+				<div><h5>{{details.product.price | currency}}</h5></div>
+				<div class="description"><p>{{details.product.description}}</p></div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

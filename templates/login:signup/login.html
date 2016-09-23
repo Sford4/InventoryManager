@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="templates/login:signup/login:signup.css">
+	<title>Login</title>
+</head>
+<body ng-controller="login">
+
+	<div class="form">
+		<h2 class="title">Login- for loggin in!</h2>
+		<form name="logForm" nonvalidation>
+			<div class="form-stuff">
+				<div id="login-email">
+					<input type="text" ng-model="login.previousUser.email" placeholder="Email" required>
+				</div>
+				<div id="login-password">
+					<input type="password" ng-model="login.previousUser.password" placeholder="Password" required>
+				</div>	
+				<div id="login-btn">
+					<a ui-sref="products">
+						<button ng-click="login.login(login.previousUser)">Login</button>
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="templates/dashboard/dashboard.css">
+	<title>Dashboard</title>
+</head>
+<body>
+	<div><h1>Admin dashboard</h1></div>
+	<div >
+		<div>
+			<h2 class="table-title">Dramatic Overview</h2>
+			<table>
+				<tr class="header-row">
+					<td class="do1">Total Transactions</td>
+					<td class="do2">Sales</td>
+					<td class="do3">Returns</td>
+					<td class="do4">Total Cost</td>
+					<td class="do5">Total Revenue</td>
+					<td class="do6">Total Profit</td>
+				</tr>
+				<tr>
+					<td class="do1">{{ dash.salesNum() + dash.returnsNum() }}</td>
+					<td class="do2">{{ dash.salesNum() }}</td>
+					<td class="do3">{{ dash.returnsNum() }}</td>
+					<td class="do4">{{ dash.totalCost() | currency:"$" }}</td>
+					<td class="do5">{{ dash.totalPrice() | currency:"$" }}</td>
+					<td class="do6">{{ dash.totalPrice() - dash.totalCost() | currency:"$" }}</td>
+				</tr>
+			</table>
+
+		</div>	
+
+		<!-- 1) See summary of all transaction types and store’s profits/revenue/costs:
+		Number of transactions
+		Inventory affected
+		Total cost
+		Total Revenue
+		Total Profit -->
+
+			
+		<div id="dash-transaction-list" >
+			<h2 class="table-title">Transaction Overview  <a ng-click="dash.newTransOpen()" class="glyphicon glyphicon-plus"></a>  <a ng-click="editTrans = !editTrans; dash.editTransMode = null" class="glyphicon glyphicon-edit"></a></h2>
+			<form>
+			    <div class="form-group">
+			      <div class="input-group">
+			        <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+
+			        <input type="text" class="search-input form-control" placeholder="Search Transactions" ng-model="searchTrans">
+
+			      </div>      
+			    </div>
+		  	</form>
+			<table>
+			<thead>
+					<tr class="header-row">
+						<td class="to1"> 
+							<a ng-click="sortType = 'id'; reverse = !reverse"> 
+								ID
+								<span ng-show="sortType === 'id' && !reverse" class="glyphicon glyphicon-triangle-bottom"></span>
+								<span ng-show="sortType === 'id' && reverse" class="glyphicon glyphicon-triangle-top"></span>
+							</a>
+						</td>
+						<td class="to2"> 
+							<a ng-click="sortType = 'date'; reverse = !reverse"> 
+								Date
+								<span ng-show="sortType === 'date' && !reverse" class="glyphicon glyphicon-triangle-bottom"></span>
+								<span ng-show="sortType === 'date' && reverse" class="glyphicon glyphicon-triangle-top"></span>
+							</a>
+						</td>
+						<td class="to3">
+							<a ng-click="sortType = 'type.description'; reverse = !reverse"> 
+								Type of Transaction
+								<span ng-show="sortType === 'type.description' && !reverse" class="glyphicon glyphicon-triangle-bottom"></span>
+								<span ng-show="sortType === 'type.description' && reverse" class="glyphicon glyphicon-triangle-top"></span>
+							</a>
+						</td>
+						<td class="to4">
+							<a ng-click="sortType = 'totalCost'; reverse = !reverse"> 
+								Cost
+								<span ng-show="sortType === 'totalCost' && !reverse" class="glyphicon glyphicon-triangle-bottom"></span>
+								<span ng-show="sortType === 'totalCost' && reverse" class="glyphicon glyphicon-triangle-top"></span>
+							</a>
+						</td>
+						<td class="to5">
+							<a ng-click="sortType = 'totalPrice'; reverse = !reverse"> 
+								Price
+								<span ng-show="sortType === 'totalPrice' && !reverse" class="glyphicon glyphicon-triangle-bottom"></span>
+								<span ng-show="sortType === 'totalPrice' && reverse" class="glyphicon glyphicon-triangle-top"></span>
+							</a>
+						</td>
+						<td ng-show="editTrans" class="to6">
+								EDIT
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="transaction in dash.transactionList | orderBy:sortType:reverse | filter:searchTrans">
+						<td class="to1">
+							<a ng-click="dash.subtransOpen(transaction)"><span ng-hide="dash.editTransMode === transaction.id">{{transaction.id}}</span></a>
+							<input ng-model="dash.currentTransaction.id" ng-show="dash.editTransMode === transaction.id">
+						</td>
+						<td class="to2">
+							<span ng-hide="dash.editTransMode === transaction.id">{{transaction.date | date: 'yyyy-MM-dd'}}</span>
+							<div ng-show="dash.editTransMode === transaction.id" class="datepicker">
+						        <p class="input-group">
+						            <input type="text" class="form-control" uib-datepicker-popup="{{dash.format}}" ng-model="dash.currentTransaction.date" is-open="dash.popup1.opened" datepicker-options="dash.dateOptions" ng-required="true" close-text="Close" alt-input-formats="dash.altInputFormats" />
+						          	<span class="input-group-btn">
+						            <<button type="button" class="btn btn-default" ng-click="dash.open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+						          </span>
+						        </p>
+						    </div>
+						</td>
+						<td class="to3">
+							<span ng-hide="dash.editTransMode === transaction.id">{{transaction.type.description}}</span>
+							<select name="type-id" ng-model="dash.currentTransaction.type.description" ng-show="dash.editTransMode === transaction.id" class="transType">
+				      			<option value=1>Sale</option>
+				      			<option value=2>Lost/Stolen</option>
+				      			<option value=3>Returned to Supplier</option>
+				      			<option value=4>Inventory Purchase</option>
+				      			<option value=5>Returned</option>
+				      			<option value=6>Returned Defective</option>
+				   			</select>
+						</td>
+						<td class="to4">
+							<span>{{transaction.totalCost | currency:"$" }}</span>
+						</td>
+						<td class="to5">
+							<span>{{transaction.totalPrice | currency:"$" }}</span>
+						</td>
+						<td class="to6" ng-hide="!editTrans || dash.editTransMode === transaction.id"><button ng-click="dash.setTransEdit(transaction)">Edit</button></td>
+						<td ng-show="dash.editTransMode === transaction.id"><button ng-click="dash.saveTransEdit(transaction)" >Save</button></td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- 2) See a paginated table report of all transactions
+			Clicking on a transaction takes the admin to the transactionDetails.html page
+	 -->
+		</div>
+		
+
+
+
+
+
+
+
+
+	<div id="dash-product-table" >
+		<h2 class="table-title">Product Overview   <a ng-click="dash.newProdOpen()" class="glyphicon glyphicon-plus"></a>  <a ng-click="editProd = !editProd; dash.editProdMode = null" class="glyphicon glyphicon-edit"></a></h2>
+		<form>
+		    <div class="form-group">
+		      <div class="input-group">
+		        <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+
+		        <input type="text" class="form-control" placeholder="Search Products" ng-model="searchProds">
+
+		      </div>      
+		    </div>
+	  	</form>
+		<table>
+			<thead>
+				<tr class="header-row">
+					<td class="po1">
+						<a ng-click="sortType = 'id'; sortReverse = !sortReverse"> 
+							ID
+							<span ng-show="sortType === 'id' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							<span ng-show="sortType === 'id' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+						</a>
+					</td>
+					<td class="po2">
+						<a ng-click="sortType = 'product'; sortReverse = !sortReverse"> 
+							Product
+							<span ng-show="sortType === 'product' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							<span ng-show="sortType === 'product' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+						</a>
+					</td>
+					<td class="po3">
+							<img>Thumbnail
+					</td>
+					<td class="po4">
+						<a ng-click="sortType = 'description'; sortReverse = !sortReverse"> 
+							Description
+							<span ng-show="sortType === 'description' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							<span ng-show="sortType === 'description' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+						</a>
+					</td>
+					<td class="po5">
+						<a ng-click="sortType = 'price'; sortReverse = !sortReverse"> 
+							Price
+							<span ng-show="sortType === 'price' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+							<span ng-show="sortType === 'price' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+						</a>
+					</td>
+					<td class="po6">
+						<a ng-click="sortType = 'cost'; sortReverse = !sortReverse"> 
+							Cost
+							<span ng-show="sortType === 'cost' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+							<span ng-show="sortType === 'cost' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+						</a>
+					</td>
+					<td class="po7">
+						<a ng-click="sortType = 'amt'; sortReverse = !sortReverse"> 
+							Amount
+							<span ng-show="sortType === 'amt' && sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+							<span ng-show="sortType === 'amt' && !sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+						</a>
+					</td>
+					<td class="po8" ng-show="editProd">
+							EDIT
+					</td>
+					<td class="po9" ng-show="editProd">
+						Save
+					</td>
+					<td class="po10" ng-show="editProd">
+						Delete
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="product in dash.productList | orderBy:sortType:sortReverse | filter:searchProds">
+					<td class="po1"> 
+							<span ng-hide="dash.editProdMode === product.id">{{product.id}}</span>
+							<input ng-model="dash.currentProduct.id" ng-show="dash.editProdMode === product.id" >
+					</td>
+					<td class="po2"> 
+							<span ng-hide="dash.editProdMode === product.id"><a ng-click="dash.productTransOpen(product)">{{product.name}}</a></span>
+							<input class="prodInput" ng-model="dash.currentProduct.name" ng-show="dash.editProdMode === product.id">
+					</td>
+					
+					<td class="po3"> 
+						<div ng-hide="dash.editProdMode === product.id" class="thumbnail"><img class="mini-thumb" src="{{product.imgThumbnail}}"></div>
+						<input class="thumbInput" ng-model="dash.currentProduct.imgThumbnail" ng-show="dash.editProdMode === product.id">
+					</td>
+
+					<td class="po4"> 
+							<span ng-hide="dash.editProdMode === product.id">{{product.description}}</span>
+							<div class="prodDescription"><input type="textarea" ng-model="dash.currentProduct.description" ng-show="dash.editProdMode === product.id" ></div>
+					</td>
+					<td class="po5"> 
+						<span ng-hide="dash.editProdMode === product.id">{{product.price | currency:"$" }}</span>
+						<input ng-model="dash.currentProduct.price" ng-show="dash.editProdMode === product.id">
+					</td>
+					<td class="po6"> 
+						<span ng-hide="dash.editProdMode === product.id">{{product.cost | currency:"$" }}</span>
+						<input ng-model="dash.currentProduct.cost" ng-show="dash.editProdMode === product.id">
+					</td>
+					<td class="po7"> 
+						<span ng-hide="dash.editProdMode === product.id">{{product.amt}}</span>
+						<input ng-model="dash.currentProduct.amt" ng-show="dash.editProdMode === product.id">
+					</td>
+					<td class="po8" ng-hide="!editProd || dash.editProdMode === product.id"><button ng-click="dash.setProdEdit(product)">Edit</button></td>
+					<td class="po9" ng-show="dash.editProdMode === product.id"><button ng-click="dash.saveProdEdit(product)" >Save</button></td>
+					<td class="po10" ng-show="editProd" class="delete-btn"><span ng-show="dash.editProdMode === product.id" class="glyphicon glyphicon-trash"  ng-click="dash.removeProd(product)"></span></td>
+				</tr>
+			</tbody>
+		</table>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+button {
+	background-color: #9370DB;
+    border: none;
+    color: white;
+    padding: 8px 20px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.form {
+	margin: 5vw 45%;
+	border: 1px solid #778899;
+	width: 30vw;
+	background-color: #E6E6FA;
+}
+
+.form-stuff {
+	padding: 1vw 8vw 3vw 8vw;
+}
+
+body {
+	
+}
+
+.title {
+  margin: 0;
+  padding: 1vw 4vw 1vw 4vw;
+  background-color: #9370DB;
+  color: white;
+  width: auto;
+  display: block;
+  overflow:hidden;
+  border: 1px solid #778899;
+}
+
+.fail-msg{
+  color: red;
+}

@@ -1,0 +1,273 @@
+table {
+    border: 1px solid gray;
+    border-collapse: separate;
+    width: 90%;
+    margin: .5vw auto;
+}
+
+table tbody, table thead
+{
+    display: block;
+    width: 100%;
+}
+
+table tbody{
+  max-height: 25vw;
+  overflow-y: scroll;
+}
+
+td{
+	padding-left: 3vw;
+	height: 2.5vw;
+}
+
+
+tr:nth-child(even) {
+	background-color: #E6E6FA;
+}
+
+
+
+.header-row {
+	font-weight: bold;
+	background-color: #9370DB;
+	color: white;
+}
+
+.table-title {
+	margin-left: 11vw;
+	margin-top: 3vw;
+	font-weight: bold;
+
+}
+
+td a:hover{
+  color: #9370DB;
+  cursor: pointer;
+}
+
+
+h1 {
+  margin: 0 2vw;
+  border-bottom: 1px solid #9370DB;
+  border-bottom-width: thick;
+}
+
+.white, .white a {
+  color: #fff;
+}
+
+.thumbnail {
+  position: relative;
+  width: 10vw;
+  height: 7vw;
+  overflow: hidden;
+
+}
+.thumbnail img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  width: auto;
+  -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+}
+.thumbnail img.mini-thumb {
+  width: 100%;
+  height: auto;
+}
+
+input {
+	width: 3vw;
+}
+
+input.transType {
+	width: 10vw;
+}
+
+.prodDescription>input {
+	width: 25vw;
+	height: 4vw;
+	white-space: nowrap;
+	text-overflow: none;
+	max-width: 25vw;
+}
+
+.form-group {
+	width: 90vw;
+	margin: 0 auto;
+}
+
+button {
+	background-color: #9370DB;
+    border: none;
+    color: white;
+    padding: 8px 20px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.delete-btn{
+  padding-right: 2vw;
+  font-size: 14pt;
+  cursor: pointer;
+}
+
+.datepick-btn{
+  height: 26px;
+  width: 20px;
+}
+
+.datepick-btn i{
+  color: white;
+}
+
+
+td > a {
+	color: white;
+}
+
+tbody a{
+  color: blue;
+}
+
+.modal-body input {
+	width: 10vw;
+}
+
+.close {
+	color: white;
+}
+
+.show-more-btn{
+	height: 2vw;
+	width: 10vw;
+  vertical-align: center;
+  line-height: 2vw;
+  padding: 1px 0 10px 0;
+}
+
+.modal-header {
+   background: #9370DB;
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+   color: white;
+}
+
+#myModal .modal-body
+{
+   max-height:80%;
+}
+#myModal.modal
+{
+   height:80%;
+   width:70%;
+   margin-left: -35%; 
+}
+@media (max-width: 768px) {
+   .modal
+   {
+    width:90%;
+        margin-left: 2%; 
+   }
+}
+
+.do1{
+  width: 15vw;
+}
+
+.do2{
+   width: 15vw;
+}
+
+.do3{
+   width: 15vw;
+}
+
+.do4{
+   width: 15vw;
+}
+
+.do5{
+   width: 15vw;
+}
+
+.do6{
+   width: 15vw;
+}
+
+.to1{
+  width: 18vw;
+}
+
+.to2{
+   width: 18vw;
+}
+
+.to3{
+   width: 18vw;
+}
+
+.to4{
+   width: 18vw;
+}
+
+.to5{
+   width: 18vw;
+}
+
+.to6{
+   width: 18vw;
+}
+
+
+
+.po1{
+  width: 5vw;
+}
+
+.po2{
+   width: 15vw;
+}
+
+.po3{
+   width: 15vw;
+}
+
+.po4{
+   width: 25vw;
+}
+
+.po5{
+   width: 10vw;
+}
+
+.po6{
+   width: 10vw;
+}
+
+.po7{
+  width: 10vw;
+}
+
+
+.thumbInput{
+  width: 10vw;
+}
+
+.prodInput{
+  width: 8vw;
+}
+
+
+
+
+
+
+
+
+
+
